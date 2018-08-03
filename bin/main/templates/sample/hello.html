@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>Sample</title>
+</head>
+<body>
+	<form name="sample" th:object="${sampleBean}" action="/sample/send" method="post">
+		<h1>Sample page</h1>
+
+		<div th:each="error : ${#fields.detailedErrors()}">
+			<p th:text="${error.message}">Error message</p>
+		</div>
+
+		<p th:text="*{message}"></p>
+		<p th:if="*{textFlg}" th:text="*{nameText}"></p>
+<!-- 		<input type="text" th:field="*{name}" th:class="${#fields.hasErrors('name')} ? 'has-error'" /> -->
+		<input type="text" th:field="*{name}" th:errorclass="error-field" />
+		<button type="submit">送信</button>
+	</form>
+</body>
+</html>
